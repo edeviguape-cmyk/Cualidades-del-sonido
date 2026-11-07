@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Cualidades del Sonido - 6º Primaria</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0d9488;
+            --accent: #f59e0b;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 3rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, var(--primary));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #1e293b;
+            padding: 0.75rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        nav button:hover, nav button.active {
+            color: white;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            border-top: 5px solid var(--primary);
+        }
+
+        .section-card h2 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .info-box {
+            background: #f1f5f9;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .info-box h3 { color: var(--secondary); margin-bottom: 0.5rem; }
+
+        .audio-demo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #eff6ff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .btn-sound {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-sound:hover { background: var(--primary-dark); }
+        .btn-sound:active { transform: scale(0.97); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th { background: #f8fafc; color: var(--text-light); font-weight: 600; }
+
+        .exercise-group {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 140px;
+            padding: 0.4rem 0.6rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .fill-blank.correct { border-color: var(--success); background: #f0fdf4; }
+        .fill-blank.incorrect { border-color: var(--danger); background: #fef2f2; }
+
+        .btn-check {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.65rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: background 0.2s;
+        }
+
+        .btn-check:hover { background: #d97706; }
+
+        .feedback {
+            margin-top: 1rem;
+            font-weight: 600;
+            padding: 0.75rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback.show { display: block; }
+        .feedback.success { background: #dcfce7; color: #15803d; }
+        .feedback.error { background: #fee2e2; color: #b91c1c; }
+
+        .option-label {
+            display: block;
+            padding: 0.6rem 1rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .option-label:hover { background: #f1f5f9; }
+        .option-label input { margin-right: 0.5rem; }
+
+        footer {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Las Cualidades del Sonido</h1>
+        <p>Educación Artística (Música) | 6º de Educación Primaria</p>
+    </header>
+
+    <nav>
+        <button onclick="scrollToSec('teoria', this)" class="active">1. Teoría</button>
+        <button onclick="scrollToSec('cualidades', this)">2. Las 4 Cualidades</button>
+        <button onclick="scrollToSec('audicion', this)">3. Audición</button>
+        <button onclick="scrollToSec('ejercicios', this)">4. Ejercicios</button>
+        <button onclick="scrollToSec('test', this)">5. Cuestionario</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- SECCIÓN 1: CONCEPTO Y PROPAGACIÓN -->
+        <section id="teoria" class="section-card">
+            <h2>🔊 ¿Qué es el sonido y cómo se propaga?</h2>
+            <p>El <strong>sonido</strong> es la sensación que se produce en nuestro oído por la <strong>vibración de un cuerpo</strong>[cite: 85]. Esta vibración se propaga por un medio físico (aire, agua o madera) en forma de <strong>onda sonora</strong>[cite: 85].</p>
+            
+            <div class="grid-2">
+                <div class="info-box">
+                    <h3>⚡ Velocidad del Sonido</h3>
+                    <p>En el aire, el sonido se propaga a una velocidad de <strong>340 m/s</strong> (recorre 340 metros cada segundo)[cite: 85].</p>
+                </div>
+                <div class="info-box">
+                    <h3>🔁 Reverberación y Eco</h3>
+                    <p>Cuando la onda encuentra un obstáculo, rebota[cite: 85]:</p>
+                    <ul>
+                        <li><strong>Reverberación:</strong> El sonido parece durar más y extinguirse más tarde[cite: 85].</li>
+                        <li><strong>Eco:</strong> Si el obstáculo está lejos, escuchamos el sonido reflejado de forma separada[cite: 85].</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: LAS 4 CUALIDADES -->
+        <section id="cualidades" class="section-card">
+            <h2>🎵 Las 4 Cualidades del Sonido</h2>
+            <p>Todo sonido posee cuatro características fundamentales[cite: 85, 94]:</p>
+
+            <div class="grid-2">
+                <!-- ALTURA -->
+                <div class="info-box" style="border-left-color: #ef4444;">
+                    <h3 style="color: #ef4444;">1. Altura (Agudo / Grave)</h3>
+                    <p>Distingue entre sonidos agudos y graves[cite: 87, 94]. Se relaciona con la <strong>frecuencia</strong> (número de vibraciones por segundo) y se mide en <strong>Hertzios (Hz)</strong>[cite: 87, 94].</p>
+                    <p><small>Humano: escucha entre 20 Hz y 20.000 Hz. Menos de 20 Hz = <em>Infrasonidos</em>; Más de 20.000 Hz = <em>Ultrasonidos</em>[cite: 87, 95]. En música se representa mediante las <strong>notas musicales</strong>[cite: 87, 97].</small></p>
+                    <div class="audio-demo">
+                        <span>Escuchar diferencia:</span>
+                        <div>
+                            <button class="btn-sound" onclick="playTone(880, 0.5, 'sine')">🔊 Agudo (880Hz)</button>
+                            <button class="btn-sound" onclick="playTone(130, 0.5, 'sine')" style="background:#475569;">🔊 Grave (130Hz)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DURACIÓN -->
+                <div class="info-box" style="border-left-color: #3b82f6;">
+                    <h3 style="color: #3b82f6;">2. Duración (Largo / Corto)</h3>
+                    <p>Se refiere a la longitud del sonido[cite: 88]. Depende de la <strong>persistencia</strong> de la onda (lo que tarda en extinguirse)[cite: 88, 95] y se mide en <strong>pulsos</strong>[cite: 88, 93].</p>
+                    <p><small>En música se representa con las <strong>figuras musicales</strong> y sus silencios (negra, blanca, corchea...)[cite: 88, 97].</small></p>
+                    <div class="audio-demo">
+                        <span>Escuchar diferencia:</span>
+                        <div>
+                            <button class="btn-sound" onclick="playTone(440, 1.8, 'sine')">🔊 Largo (1.8s)</button>
+                            <button class="btn-sound" onclick="playTone(440, 0.2, 'sine')" style="background:#475569;">🔊 Corto (0.2s)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTENSIDAD -->
+                <div class="info-box" style="border-left-color: #10b981;">
+                    <h3 style="color: #10b981;">3. Intensidad (Fuerte / Suave)</h3>
+                    <p>Se relaciona con el volumen[cite: 91, 94]. Depende de la <strong>amplitud de la onda</strong>[cite: 91, 95] y se mide en <strong>Decibelios (dB)</strong>[cite: 91, 94].</p>
+                    <p><small>El umbral del dolor está a 120 dB[cite: 96]. En música se representa con los <strong>matices dinámicos</strong> (<em>pp, p, mp, mf, f, ff</em>)[cite: 90, 91].</small></p>
+                    <div class="audio-demo">
+                        <span>Escuchar diferencia:</span>
+                        <div>
+                            <button class="btn-sound" onclick="playTone(440, 0.6, 'sine', 0.8)">🔊 Forte (f)</button>
+                            <button class="btn-sound" onclick="playTone(440, 0.6, 'sine', 0.1)" style="background:#475569;">🔊 Piano (p)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TIMBRE -->
+                <div class="info-box" style="border-left-color: #8b5cf6;">
+                    <h3 style="color: #8b5cf6;">4. Timbre (Fuente emisora)</h3>
+                    <p>Es el "color" del sonido que permite identificar la fuente que suena (instrumentos, voces, objetos o animales)[cite: 92, 93, 94]. Depende de la mezcla del sonido fundamental con los <strong>armónicos</strong>[cite: 96].</p>
+                    <div class="audio-demo">
+                        <span>Escuchar diferencia:</span>
+                        <div>
+                            <button class="btn-sound" onclick="playTone(440, 0.6, 'sine')">🔊 Onda Senoidal</button>
+                            <button class="btn-sound" onclick="playTone(440, 0.6, 'square')" style="background:#475569;">🔊 Onda Cuadrada</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLA RESUMEN -->
+            <h3 style="margin-top: 1.5rem; color: var(--primary);">Resumen General de Cualidades</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cualidad</th>
+                        <th>Característica</th>
+                        <th>Medida Científica</th>
+                        <th>Representación Musical</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Altura</strong></td>
+                        <td>Agudo / Grave[cite: 87, 93]</td>
+                        <td>Hertzios (Hz) / Frecuencia[cite: 87, 93]</td>
+                        <td>Notas musicales[cite: 87, 93]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duración</strong></td>
+                        <td>Largo / Corto[cite: 88, 93]</td>
+                        <td>Pulsos / Persistencia[cite: 88, 93, 95]</td>
+                        <td>Figuras musicales[cite: 88, 93]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intensidad</strong></td>
+                        <td>Fuerte / Suave[cite: 90, 93]</td>
+                        <td>Decibelios (dB) / Amplitud[cite: 91, 93, 95]</td>
+                        <td>Matices dinámicos (p, f...)[cite: 90, 91, 93]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Timbre</strong></td>
+                        <td>Color del sonido[cite: 93, 96]</td>
+                        <td>Armónicos[cite: 96]</td>
+                        <td>Voces e instrumentos[cite: 92, 93, 97]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 3: LABORATORIO DE AUDICIÓN -->
+        <section id="audicion" class="section-card">
+            <h2>🎧 Laboratorio de Entrenamiento Auditivo</h2>
+            <p>Haz clic en "Generar Sonido Aleatorio", escucha atentamente e identifica qué cualidad o característica está destacando.</p>
+            
+            <div style="text-align: center; margin: 1.5rem 0;">
+                <button class="btn-sound" style="padding: 0.8rem 1.5rem; font-size: 1.1rem; background: var(--accent);" onclick="generateRandomSound()">▶ Generar Sonido Aleatorio</button>
+            </div>
+
+            <div id="audioQuizBox" style="display: none; background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px solid #cbd5e1;">
+                <p><strong>¿Qué has escuchado?</strong></p>
+                <div id="audioOptions" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;"></div>
+                <div id="audioFeedback" class="feedback"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: EJERCICIOS PARA COMPLETAR -->
+        <section id="ejercicios" class="section-card">
+            <h2>✏️ Ejercicios para Completar</h2>
+            <p>Rellena los huecos con la palabra adecuada basándote en la teoría aprendida:</p>
+
+            <form id="fillForm">
+                <div class="exercise-group">
+                    <p>1. La velocidad del sonido en el aire es de <input type="text" id="f1" class="fill-blank"> m/s[cite: 85].</p>
+                    <p>2. La cualidad que distingue un sonido agudo de uno grave es la <input type="text" id="f2" class="fill-blank">[cite: 87].</p>
+                    <p>3. El oído humano no puede percibir frecuencias menores a <input type="text" id="f3" class="fill-blank"> Hz[cite: 87].</p>
+                    <p>4. La intensidad se mide científicamente en <input type="text" id="f4" class="fill-blank">[cite: 91, 94].</p>
+                    <p>5. En música, la intensidad se representa mediante los matices <input type="text" id="f5" class="fill-blank">[cite: 91].</p>
+                    <p>6. La cualidad que nos permite diferenciar la voz de dos personas o instrumentos es el <input type="text" id="f6" class="fill-blank">[cite: 92, 94].</p>
+                </div>
+                <button type="button" class="btn-check" onclick="checkFillBlanks()">Comprobar Respuestas</button>
+                <div id="fillFeedback" class="feedback"></div>
+            </form>
+        </section>
+
+        <!-- SECCIÓN 5: CUESTIONARIO TIPO TEST -->
+        <section id="test" class="section-card">
+            <h2>📝 Cuestionario Tipo Test</h2>
+            <form id="quizForm">
+                
+                <div class="exercise-group">
+                    <p><strong>1. ¿Qué es el fenómeno del Eco?</strong>[cite: 85]</p>
+                    <label class="option-label"><input type="radio" name="q1" value="a"> A) La altura del sonido emitida en un espacio pequeño.</label>
+                    <label class="option-label"><input type="radio" name="q1" value="b"> B) El sonido reflejado que se escucha de forma separada del emitido[cite: 85].</label>
+                    <label class="option-label"><input type="radio" name="q1" value="c"> C) La pérdida de audición provocada por sonidos de más de 120 dB[cite: 96].</label>
+                </div>
+
+                <div class="exercise-group">
+                    <p><strong>2. ¿Qué término científico se relaciona con la INTENSIDAD del sonido?</strong>[cite: 91, 95]</p>
+                    <label class="option-label"><input type="radio" name="q2" value="a"> A) Persistencia de onda[cite: 88, 95].</label>
+                    <label class="option-label"><input type="radio" name="q2" value="b"> B) Frecuencia de onda[cite: 87, 94].</label>
+                    <label class="option-label"><input type="radio" name="q2" value="c"> C) Amplitud de la onda[cite: 91, 95].</label>
+                </div>
+
+                <div class="exercise-group">
+                    <p><strong>3. ¿Cómo se representan las DURACIONES en la partitura musical?</strong>[cite: 88, 93]</p>
+                    <label class="option-label"><input type="radio" name="q3" value="a"> A) Mediante las notas musicales (do, re, mi...)[cite: 87, 93].</label>
+                    <label class="option-label"><input type="radio" name="q3" value="b"> B) Mediante las figuras musicales y sus silencios[cite: 88, 93].</label>
+                    <label class="option-label"><input type="radio" name="q3" value="c"> C) Con términos italianos como forte o piano[cite: 90, 91, 93].</label>
+                </div>
+
+                <div class="exercise-group">
+                    <p><strong>4. ¿A partir de cuántos decibelios (dB) se encuentra el "Umbral del dolor"?</strong>[cite: 96]</p>
+                    <label class="option-label"><input type="radio" name="q4" value="a"> A) 20 dB[cite: 95].</label>
+                    <label class="option-label"><input type="radio" name="q4" value="b"> B) 100 dB[cite: 91].</label>
+                    <label class="option-label"><input type="radio" name="q4" value="c"> C) 120 dB[cite: 96].</label>
+                </div>
+
+                <button type="button" class="btn-check" onclick="checkQuiz()">Enviar Cuestionario</button>
+                <div id="quizFeedback" class="feedback"></div>
+            </form>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Recurso Didáctico de Música | Basado en el libro de 6º de Primaria</p>
+    </footer>
+
+    <script>
+        let audioCtx = null;
+
+        // INICIALIZACIÓN Y DESBLOQUEO DE AUDIO
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // GENERACIÓN DE TONOS CON ENVELOPE (Evita pops/clicks)
+        function playTone(freq, duration, type = 'sine', volume = 0.3) {
+            initAudio();
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            
+            // Ataque y caída suave para que suene correctamente en todos los navegadores
+            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(Math.max(volume, 0.01), audioCtx.currentTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(audioCtx.currentTime);
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        let currentTarget = "";
+
+        function generateRandomSound() {
+            initAudio();
+            const types = ['agudo', 'grave', 'fuerte', 'suave', 'largo', 'corto'];
+            currentTarget = types[Math.floor(Math.random() * types.length)];
+
+            document.getElementById('audioQuizBox').style.display = 'block';
+            document.getElementById('audioFeedback').className = 'feedback';
+            
+            switch(currentTarget) {
+                case 'agudo': playTone(1000, 0.6, 'sine', 0.3); break;
+                case 'grave': playTone(130, 0.6, 'sine', 0.3); break;
+                case 'fuerte': playTone(440, 0.6, 'sine', 0.8); break;
+                case 'suave': playTone(440, 0.6, 'sine', 0.08); break;
+                case 'largo': playTone(440, 1.8, 'sine', 0.3); break;
+                case 'corto': playTone(440, 0.15, 'sine', 0.3); break;
+            }
+
+            const container = document.getElementById('audioOptions');
+            container.innerHTML = '';
+            types.forEach(type => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-sound';
+                btn.style.background = '#475569';
+                btn.innerText = type.toUpperCase();
+                btn.onclick = () => checkAudioAnswer(type);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAudioAnswer(answer) {
+            const fb = document.getElementById('audioFeedback');
+            fb.classList.add('show');
+            if (answer === currentTarget) {
+                fb.className = 'feedback show success';
+                fb.innerText = '¡Correcto! Has identificado correctamente el sonido.';
+            } else {
+                fb.className = 'feedback show error';
+                fb.innerText = 'Incorrecto. Vuelve a hacer clic en "Generar Sonido Aleatorio" para intentar otra vez.';
+            }
+        }
+
+        function checkFillBlanks() {
+            const answers = {
+                f1: ['340'],
+                f2: ['altura'],
+                f3: ['20'],
+                f4: ['decibelios', 'db'],
+                f5: ['dinámicos', 'dinamicos'],
+                f6: ['timbre']
+            };
+
+            let score = 0;
+            let total = 6;
+
+            for (let id in answers) {
+                const input = document.getElementById(id);
+                const val = input.value.trim().toLowerCase();
+                if (answers[id].includes(val)) {
+                    input.className = 'fill-blank correct';
+                    score++;
+                } else {
+                    input.className = 'fill-blank incorrect';
+                }
+            }
+
+            const fb = document.getElementById('fillFeedback');
+            fb.classList.add('show');
+            if (score === total) {
+                fb.className = 'feedback show success';
+                fb.innerText = `¡Excelente! Has completado acertadamente todas las respuestas (${score}/${total}).`;
+            } else {
+                fb.className = 'feedback show error';
+                fb.innerText = `Has acertado ${score} de ${total}. Revisa los campos marcados en rojo.`;
+            }
+        }
+
+        function checkQuiz() {
+            const key = { q1: 'b', q2: 'c', q3: 'b', q4: 'c' };
+            let score = 0;
+            let total = 4;
+
+            for (let q in key) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === key[q]) {
+                    score++;
+                }
+            }
+
+            const fb = document.getElementById('quizFeedback');
+            fb.classList.add('show');
+            if (score === total) {
+                fb.className = 'feedback show success';
+                fb.innerText = `¡Enhorabuena! Has respondido correctamente a las ${total} preguntas.`;
+            } else {
+                fb.className = 'feedback show error';
+                fb.innerText = `Has obtenido ${score} de ${total} respuestas correctas. Revisa el texto e inténtalo de nuevo.`;
+            }
+        }
+
+        function scrollToSec(id, btnElement) {
+            const sec = document.getElementById(id);
+            if (sec) {
+                sec.scrollIntoView({ behavior: 'smooth' });
+            }
+            if (btnElement) {
+                document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
